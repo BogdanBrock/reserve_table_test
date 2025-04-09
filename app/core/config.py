@@ -1,6 +1,8 @@
 """Модуль для настройки переменных окружения."""
 
-from pydantic_settings import BaseSettings
+from pathlib import Path
+
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -11,6 +13,10 @@ class Settings(BaseSettings):
     POSTGRES_PASSWORD: str
     DB_HOST: str
     DB_PORT: int
+
+    model_config = SettingsConfigDict(
+        env_file=Path(__file__).parent.parent.parent / '.env'
+    )
 
     @property
     def db_url(self):
