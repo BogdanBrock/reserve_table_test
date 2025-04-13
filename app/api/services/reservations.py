@@ -28,10 +28,7 @@ class ReservationService(BaseService):
         table = await table_crud.get(schema.table_id, session)
         if not table:
             raise NotFoundError('Такого столика не существует')
-        reservation = await self.crud.get_reservation_by_time(
-            schema,
-            session
-        )
+        reservation = await self.crud.get_reservation_by_time(schema, session)
         if reservation:
             raise ValidationError(
                 'Нельзя зарезервировать на это время, т.к. ближайшая '
@@ -48,8 +45,7 @@ class ReservationService(BaseService):
         """Метод для удаления брони."""
         reservation = await self.crud.get(reservation_id, session)
         if not reservation:
-            raise NotFoundError('Такого зарезервированного '
-                                'столика не существует')
+            raise NotFoundError('Такой брони не существует')
         await self.crud.delete(reservation, session)
 
 
