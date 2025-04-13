@@ -45,8 +45,7 @@ class ReservationService(BaseService):
         """Метод для удаления брони."""
         reservation = await self.crud.get(reservation_id, session)
         if not reservation:
-            raise NotFoundError('Такого зарезервированного '
-                                'столика не существует')
+            raise NotFoundError('Такой брони не существует')
         await self.crud.delete(reservation, session)
 
 
