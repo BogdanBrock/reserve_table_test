@@ -1,13 +1,12 @@
 """Модуль для создания базовых CRUD операций."""
 
-from typing import TypeVar, Generic
+from typing import Generic, TypeVar
 
+from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from pydantic import BaseModel
 
 from app.core.db import Base
-
 
 ModelType = TypeVar('ModelType', bound=Base)
 SchemaType = TypeVar('SchemaType', bound=BaseModel)
@@ -33,6 +32,7 @@ class CRUDBase(Generic[ModelType, SchemaType]):
         id: int,
         session: AsyncSession
     ) -> ModelType | None:
+        """Метод для получения объекта."""
         model_obj = await session.execute(
             select(self.model).
             where(self.model.id == id)

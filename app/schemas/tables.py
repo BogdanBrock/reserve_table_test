@@ -1,6 +1,6 @@
 """Модуль для создания схем."""
 
-from pydantic import BaseModel, PositiveInt, Field, field_validator
+from pydantic import BaseModel, Field, PositiveInt, field_validator
 
 from app.api.exceptions import ValidationError
 

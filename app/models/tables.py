@@ -1,4 +1,4 @@
-"""Модуль tables для создания моделей."""
+"""Модуль для создания моделей."""
 
 from sqlalchemy.orm import Mapped, relationship
 

@@ -4,7 +4,6 @@ from typing import TypeVar
 
 from app.crud import CRUDBase
 
-
 CRUDType = TypeVar('CRUDType', bound=CRUDBase)
 
 

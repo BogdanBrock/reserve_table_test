@@ -1,9 +1,9 @@
 """Модуль для создания схем."""
 
-from datetime import datetime, timedelta, time
+from datetime import datetime, time, timedelta
 
-from pydantic import (BaseModel, PositiveInt, Field,
-                      computed_field, model_validator, field_validator)
+from pydantic import (BaseModel, Field, PositiveInt, computed_field,
+                      field_validator, model_validator)
 
 from app.api.exceptions import ValidationError
 from app.models import Reservation
@@ -68,6 +68,7 @@ class ReservationReadSchema(BaseModel):
     @field_validator('reservation_time', mode='after')
     @classmethod
     def validate_reservation_time(cls, value) -> str:
+        """Метод для преобразования даты в строку."""
         return datetime.strftime(value, FORMAT_TIME)
 
     @computed_field(examples=[EXAMPLE_END_TIME])

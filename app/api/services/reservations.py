@@ -2,11 +2,11 @@
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.exceptions import ValidationError, NotFoundError
-from .base import BaseService
+from app.api.exceptions import NotFoundError, ValidationError
 from app.crud import reservation_crud, table_crud
-from app.schemas import ReservationCreateSchema
 from app.models import Reservation
+from app.schemas import ReservationCreateSchema
+from .base import BaseService
 
 
 class ReservationService(BaseService):

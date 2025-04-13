@@ -4,9 +4,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.exceptions import NotFoundError, ValidationError
 from app.crud import table_crud
+from app.models import Table
 from app.schemas import TableCreateSchema
 from .base import BaseService
-from app.models import Table
 
 
 class TableService(BaseService):

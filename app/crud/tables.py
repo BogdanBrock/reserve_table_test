@@ -3,8 +3,8 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from .base import CRUDBase
 from app.models import Table
+from .base import CRUDBase
 
 
 class CRUDTable(CRUDBase):
@@ -16,7 +16,10 @@ class CRUDTable(CRUDBase):
         session: AsyncSession
     ) -> Table | None:
         """Метод для получения стола по названию."""
-        table = await session.execute(select(Table).where(Table.name == name))
+        table = await session.execute(
+            select(Table).
+            where(Table.name == name)
+        )
         return table.scalar()
 
 

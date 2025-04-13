@@ -1,11 +1,11 @@
 """Модуль для создания маршрутов."""
 
-from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import APIRouter, Depends, status
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.services import reservation_service
-from app.schemas import ReservationCreateSchema, ReservationReadSchema
 from app.core.db import db_session
+from app.schemas import ReservationCreateSchema, ReservationReadSchema
 
 router = APIRouter()
 

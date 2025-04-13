@@ -6,7 +6,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    """Класс для настройки переменных окружения."""
+    """Класс Settings для настройки переменных окружения."""
 
     POSTGRES_DB: str
     POSTGRES_USER: str

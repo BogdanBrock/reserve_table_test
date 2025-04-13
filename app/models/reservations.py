@@ -1,10 +1,10 @@
-"""Модуль reservations для создания моделей."""
+"""Модуль для создания моделей."""
 
 from datetime import datetime, timedelta
 
 from sqlalchemy import ForeignKey, text
-from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.db import Base
 

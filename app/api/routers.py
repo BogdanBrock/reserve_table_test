@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter
 
-from app.api.endpoints import table_router, reservation_router
+from app.api.endpoints import reservation_router, table_router
 
 main_router = APIRouter(prefix='/api/v1')
 
