@@ -8,7 +8,7 @@
 [![Docker](https://img.shields.io/badge/-Docker-464646?style=flat&logo=Docker&logoColor=56C0C0&color=008080)](https://www.docker.com/)
 
 
-## Описание проекта reservation_table_test
+## Описание reservation_table_test
 "reservation_table_test" - это API приложение, где клиент может зарезервировать 
 столик для своего досуга, посмотрев при этом все брони для столика, чтобы 
 выбрать нужное для себя время. Так же удалить в случае, если клиент передумает. 
