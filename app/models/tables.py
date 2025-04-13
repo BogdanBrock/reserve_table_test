@@ -2,7 +2,7 @@
 
 from sqlalchemy.orm import Mapped, relationship
 
-from core.db import Base
+from app.core.db import Base
 
 
 class Table(Base):
@@ -17,5 +17,5 @@ class Table(Base):
     reservations: Mapped[list['Reservation']] = relationship(
         'Reservation',
         back_populates='table',
-        cascade='all, delete-orphans'
+        cascade='all, delete-orphan'
     )

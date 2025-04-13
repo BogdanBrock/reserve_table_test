@@ -1,11 +1,12 @@
 """Модуль reservations для создания моделей."""
 
-from datetime import datetime
+from datetime import datetime, timedelta
 
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.ext.hybrid import hybrid_property
 
-from core.db import Base
+from app.core.db import Base
 
 
 class Reservation(Base):
@@ -22,3 +23,13 @@ class Reservation(Base):
         'Table',
         back_populates='reservations'
     )
+
+    @hybrid_property
+    def reservation_end_time(self) -> datetime:
+        return self.reservation_time + timedelta(minutes=self.duration_minutes)
+
+    @reservation_end_time.expression
+    def reservation_end_time(cls) -> datetime:
+        return cls.reservation_time + (
+            cls.duration_minutes * text("INTERVAL '1 minute'")
+        )

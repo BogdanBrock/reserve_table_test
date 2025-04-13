@@ -2,17 +2,17 @@
 
 from fastapi import APIRouter
 
-from endpoints import table_router, reservation_router
+from app.api.endpoints import table_router, reservation_router
 
 main_router = APIRouter(prefix='/api/v1')
 
 main_router.include_router(
     table_router,
-    prefix='tables',
+    prefix='/tables',
     tags=['Table']
 )
 main_router.include_router(
     reservation_router,
-    prefix='reservations',
+    prefix='/reservations',
     tags=['Reservation']
 )

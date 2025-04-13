@@ -1,4 +1,4 @@
-"""Модуль для создания CRUD операций."""
+"""Модуль для создания базовых CRUD операций."""
 
 from typing import TypeVar, Generic
 
@@ -6,8 +6,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from pydantic import BaseModel
 
-from core.db import Base
-from models import Reservation, Table
+from app.core.db import Base
 
 
 ModelType = TypeVar('ModelType', bound=Base)
@@ -29,6 +28,17 @@ class CRUDBase(Generic[ModelType, SchemaType]):
         model_objs = await session.execute(select(self.model))
         return model_objs.scalars().all()
 
+    async def get(
+        self,
+        id: int,
+        session: AsyncSession
+    ) -> ModelType | None:
+        model_obj = await session.execute(
+            select(self.model).
+            where(self.model.id == id)
+        )
+        return model_obj.scalar()
+
     async def create(
         self,
         schema: SchemaType,
@@ -49,7 +59,3 @@ class CRUDBase(Generic[ModelType, SchemaType]):
         """Метод для удаления объекта."""
         await session.delete(model_obj)
         await session.commit()
-
-
-table_crud = CRUDBase(Table)
-reservation_crud = CRUDBase(Reservation)

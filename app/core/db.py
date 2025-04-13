@@ -18,7 +18,7 @@ async_session_maker = async_sessionmaker(engine,
 
 async def db_session() -> AsyncGenerator[AsyncSession, None]:
     """Функция для создания сессий."""
-    with async_session_maker() as session:
+    async with async_session_maker() as session:
         yield session
 
 

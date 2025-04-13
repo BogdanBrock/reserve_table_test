@@ -1,15 +1,35 @@
-"""Модуль tables для создания схем."""
+"""Модуль для создания схем."""
 
-from pydantic import BaseModel, PositiveInt, Field
+from pydantic import BaseModel, PositiveInt, Field, field_validator
+
+from app.api.exceptions import ValidationError
 
 NAME_MAX_LENGTH = 64
 LOCATION_MAX_LENGTH = 64
-MIN_COUNT_SEATS = 30
+MAX_COUNT_SEATS = 30
 
 
-class TableSchema(BaseModel):
-    """Схема TableSchema для валидации, создания и отображение данных."""
+class TableCreateSchema(BaseModel):
+    """Схема TableCreateSchema для валидации, создания данных."""
 
     name: str = Field(max_length=NAME_MAX_LENGTH)
-    seats: PositiveInt = Field(le=MIN_COUNT_SEATS)
+    seats: PositiveInt
     location: str = Field(max_length=LOCATION_MAX_LENGTH)
+
+    @field_validator('seats', mode='after')
+    @classmethod
+    def validate_seats(cls, value) -> int | None:
+        """Метод для валидации атрибута."""
+        if value > MAX_COUNT_SEATS:
+            raise ValidationError('У столика не может быть больше '
+                                  f'{MAX_COUNT_SEATS} мест')
+        return value
+
+
+class TableReadSchema(BaseModel):
+    """Схема TableReadSchema для чтения данных."""
+
+    id: PositiveInt
+    name: str
+    seats: PositiveInt
+    location: str
