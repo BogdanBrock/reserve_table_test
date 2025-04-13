@@ -10,8 +10,8 @@ from app.models import Reservation
 
 CUSTOMER_NAME_MAX_LENGTH = 64
 FORMAT_TIME = '%d.%m.%y %H:%M'
-START_WORKING = '8:00'
-END_WORKING = '23:00'
+START_WORKING = 8
+END_WORKING = 23
 MIN_DURATION_RESERVATION_TIME = 30
 EXAMPLE_START_TIME = '18.04.25 19:30'
 EXAMPLE_END_TIME = '18.04.25 20:00'
@@ -48,9 +48,9 @@ class ReservationCreateSchema(BaseModel):
         end_time = self.reservation_end_time.time()
         for t in (start_time, end_time):
             if not (time(hour=START_WORKING) <= t <= time(hour=END_WORKING)):
-                raise ValidationError('Нельзя забронировать столик '
-                                      'в это время. Ресторан работает '
-                                      f'с {START_WORKING} до {END_WORKING}')
+                raise ValidationError('Нельзя забронировать стол в это время. '
+                                      f'Ресторан работает с {START_WORKING} '
+                                      f'до {END_WORKING} часов')
         return self
 
 
